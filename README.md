@@ -41,11 +41,7 @@ Use this if the motif set is large, or contains redundancies
 
 Ex:
 
-```nohup tomtom \```
-```  -dist kullback -motif-pseudo 0.1 -text -min-overlap 1 \```
-```  /home/jm/meme/motif_databases/ARABD/ArabidopsisDAPv1.meme \```
-```  /home/jm/meme/motif_databases/ARABD/ArabidopsisDAPv1.meme \```
-```  > /home/kyu/tomtom_JASPAR.txt 2> /home/kyu/tomtom_JASPAR.log &```
+```nohup tomtom -dist kullback -motif-pseudo 0.1 -text -min-overlap 1  /home/jm/meme/motif_databases/ARABD/ArabidopsisDAPv1.meme  /home/jm/meme/motif_databases/ARABD/ArabidopsisDAPv1.meme > /home/kyu/tomtom_JASPAR.txt 2> /home/kyu/tomtom_JASPAR.log &```
 
 #### motif_clustering.py
 
@@ -61,9 +57,7 @@ You can also run MEME with the original and provide a CLUSTER_FILE later when as
 
 Ex: 
 
-```nohup fimo --oc fimo_out_ArabidopsisDAPv1 \```
-```     /home/jm/meme/motif_databases/ARABD/ArabidopsisDAPv1.meme \```
-```     /home/projects/msu_nsf_pangenomics/pgrp/data/arabidopsis/atacseq/tair10.fa &```
+```nohup fimo --oc fimo_out_ArabidopsisDAPv1  /home/jm/meme/motif_databases/ARABD/ArabidopsisDAPv1.meme /home/projects/msu_nsf_pangenomics/pgrp/data/arabidopsis/atacseq/tair10.fa &```
 
 ### Step 3: Get motif sequences
 
