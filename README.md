@@ -6,7 +6,7 @@ Global chaining: finds the length of the longest non-overlapping chain
 
 Local chaining: finds the score for the best chaining in a local area (penalizes non-chained elements)
 
-#### chaining.py
+#### ```chaining.py```
 
 Takes in anchors, pairs (a, c) linking a in the first string with c in the second
 
@@ -43,7 +43,7 @@ Ex:
 
 ```nohup tomtom -dist kullback -motif-pseudo 0.1 -text -min-overlap 1  /home/jm/meme/motif_databases/ARABD/ArabidopsisDAPv1.meme  /home/jm/meme/motif_databases/ARABD/ArabidopsisDAPv1.meme > /home/kyu/tomtom_JASPAR.txt 2> /home/kyu/tomtom_JASPAR.log &```
 
-#### motif_clustering.py
+#### ```motif_clustering.py```
 
 Outputs a cluster file detailing which motif belongs in which cluster (for post-clustered)
 Outputs a cluster meme file which can be used directly in step 2 (for pre-clustered)
@@ -63,13 +63,13 @@ Ex:
 
 These are the inputs for the BLAST search
 
-#### get_motif_sequence.py
+#### ```get_motif_sequence.py```
 
 Gets the motif sequence for each chromosome of the sequence
 
 Outputs a folder with files for each chromosome
 
-#### get_acr_motif_from_full.py
+#### ```get_acr_motif_from_full.py```
 
 Outputs the motif sequences for ACRs. 
 File format: 
@@ -87,11 +87,11 @@ If using a separate set of ACRs, try to replicate this file
 
 This is heavily recommended
 
-#### motif_relevance.py
+#### ```motif_relevance.py```
 
 Gets info about motifs in ACR files and in the full background
 
-#### create_motif_scoring.py
+#### ```create_motif_scoring.py```
 
 Creates a file from the results of motif_relevance.py that can be inputted into Step 5 to get a varied scoring
 
@@ -99,7 +99,7 @@ Creates a file from the results of motif_relevance.py that can be inputted into 
 
 Finds locally high chain scores through finding matching k-mers, then extending those hits
 
-#### v2_parallel_kmer_CRE_BLAST.py
+#### ```v2_parallel_kmer_CRE_BLAST.py```
 
 Parallelized to improve runtime. 
 Some hits are duplicates! If two different seeds get the same extension, they end up with the same score
@@ -109,22 +109,22 @@ Output gives info on location of hits and score
 
 If running ACRs from the same sequence, high aligning hits tend to be duplications. This allows us to remove those
 
-#### chain_but_not_align.py
+#### ```chain_but_not_align.py```
 
 Gets the alignment scores for all hits above a certain threshold
 Also removes duplicate hits
 
-#### create_eval_input.py
+#### ```create_eval_input.py```
 
 Simply filters for high scoring and low alignment
 
 ### Step 7: Evaluation
 
-#### evaluate_blast.py
+#### ```evaluate_blast.py```
 
 takes in a test set of ACRs, sees how many bases in the hits are from that test set
 
-#### difference_blast.py
+#### ```difference_blast.py```
 
 Same as evaluate_blast.py, but takes in two files and sees how the differences score
 
