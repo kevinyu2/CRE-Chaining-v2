@@ -1,5 +1,7 @@
 # CRE-Chaining-v2
 
+Suite of tools for chaining with Cis Regulatory Elements (CREs) to match Accessible Chromatin Regions (ACRs)
+
 ## Chaining
 
 Global chaining: finds the length of the longest non-overlapping chain
@@ -128,3 +130,58 @@ takes in a test set of ACRs, sees how many bases in the hits are from that test 
 
 Same as evaluate_blast.py, but takes in two files and sees how the differences score
 
+## ACR Clustering (/ACR_Clustering)
+
+Calculate chain scores between ACRs and cluter them
+Look at expression correlations within clusters
+
+### Step 1: Get motif sequences & weighted scores
+
+Follow Full-Genome BLAST search steps 1-4. No need to run ```get_motif_sequence.py```.
+
+### Step 2: Get pairwise chain scores
+
+Outputs a file with chain scores (global or local, potentially weighted) for each ACR with each other
+
+#### ```v3_chaining.py```
+
+Parallelized chaining. Use custom score if you ran Step 4 in Full-Genome BLAST
+
+### Step 3: Get Clusters
+
+Use hierarchical clustering to get clusters of ACRs based on chaining scores
+
+### ```get_distances.py```
+
+There are two different versions, for local and global. For local, BETA is a multiplier. For global, ALPHA determines how much the longest of the two sequence lengths is used, at 1 it is always the longest
+
+### ```hierarchical.py```
+
+Produces a cluster file detailing which thing is in which cluster. If not interested in expression, you can stop here.
+
+### Step 4: Convert Clusters to Gene Sets
+
+Turn from ACRs to the genes themselves
+
+##### ```\ACR_to_Gene\acr_to_bed.py```
+
+Get a bed file from acrs
+
+#### ```\ACR_to_Gene\gff_to_bed.py```
+
+Turn a GFF file of the genes in the genome to a bed file
+
+Now with both bed files you can run ```bedtools intersect -wa -wb -a acr.bed -b gff.bed > acr_to_gene_promoter.bed```
+
+To get an acr_to_gene file
+
+#### ```get_gene_sets_from_clusters.py```
+
+Converts each cluster to sets of genes
+
+
+### Step 5: Evaluate correlation of Expression
+
+Create graphs comparing random expression correlation to the created gene sets
+
+#### ``evaluate_expression.ipynb```
