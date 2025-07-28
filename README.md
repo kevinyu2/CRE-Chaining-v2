@@ -200,8 +200,7 @@ TEST and the remaining 90% to REFERENCE.
 
 #### ```random_regions.py```
 
-The ```random_region_match_sizes``` function can be used to generate the random regions with the same
-number and lengths as TEST. We call this group TEST-RAND.
+The ```random_region_match_sizes``` function can be used to generate the random regions with the same number and region sizes as TEST. We call this group TEST-RAND.
 
 ### Step 2: Run FIMO (MEME Suite) on ACRs and Random Regions
 
@@ -212,7 +211,7 @@ run a command similar to the one below:
 
 ### Step 3: Pairwise Chain ACRs and Random Regions
 
-#### ```anchor_chain_driver```
+#### ```../anchor_chain_driver```
 
 Set ```motif_mode``` to 'only_acr', choose the desired chain mode, and provide the folder containing all the
 FIMO folders to ```MOTIFS```. 
