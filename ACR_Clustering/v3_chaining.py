@@ -3,7 +3,6 @@
 from pathlib import Path
 from glob import glob
 import sys
-sys.path.append("/home/kyu/CRE-chaining")
 from chaining import chain_driver_np, chain_local_driver_np
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
@@ -112,7 +111,7 @@ def get_motif_loc_dict(data) :
             curr_acr = ""
             curr_idx = 0
             for line in acr_motifs :
-                if 'ACR' in line:
+                if 'ACR: ' in line:
                     curr_acr = line.rstrip().split('ACR: ')[1]
                     curr_idx = 0
 
