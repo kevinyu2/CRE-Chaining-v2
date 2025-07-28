@@ -12,9 +12,10 @@ import itertools
 #####################################################################
 
 # Hierarchical clustering threshold
-distance_threshold = 0.3
-distance_file = '/home/mwarr/Data/distances_DAPv1_clustered_global_shortest.tsv'
-OUTFILE = '/home/mwarr/Data/Clustering/hierarchical_DAPv1_clustered_global.txt'
+distance_threshold = 0.2
+distance_file = '/home/mwarr/Data/distances_DAPv1_clustered_local.tsv'
+OUTFILE = '/home/mwarr/Data/Clustering/hierarchical_DAPv1_clustered_local.txt'
+
 
 # Only output clusters of a certain size
 CLUSTER_MIN_SIZE = 4
@@ -79,7 +80,28 @@ with open(OUTFILE, 'w') as out :
     for cluster_no, cluster in tqdm(cluster_dict.items()) :
         if len(cluster) > CLUSTER_MIN_SIZE :
 
-            out.write(f"Cluster no: {cluster_no}\n")
+            if len(cluster) > 1:
+                # Get the representative
+                representative = -1
+                min_distances = float('inf')
+                for c in cluster :
+                    curr_sum = 0
+                    # calculate average distances
+                    for d in cluster :
+                        if c != d :
+                            curr_sum += distance_matrix[c][d] 
+
+                    if curr_sum < min_distances :
+                        representative = c
+                        min_distances = curr_sum
+            # if the cluster size is just 1
+            elif len(cluster) == 1 :
+                representative = cluster[0]
+            else :
+                representative = -1
+                label_dict[-1] = "None"
+
+            out.write(f"Cluster no: {cluster_no}, Representative: {label_dict[representative]}\n")
             for i, c in enumerate(cluster) :
                 if i != 0 :
                     out.write("\t")

@@ -180,11 +180,20 @@ To get an acr_to_gene file
 Converts each cluster to sets of genes
 
 
-### Step 5: Evaluate correlation of Expression
+### Step 5 (Optional): Evaluate correlation of Expression
 
 Create graphs comparing random expression correlation to the created gene sets
 
 #### ```evaluate_expression.ipynb```
+
+
+### Step 6 (For Feature Vector): Find Representative Sequence
+
+For each cluster, get a new sequence of CREs that defines it
+This uses central star MSA, and takes as the consensus a sequence of CRE's which 
+have at least 50% representation in the cluster
+
+#### ```Cluster_MSA.py```
 
 ## ACRs vs Random Regions (/ACR_rand_compare)
 
