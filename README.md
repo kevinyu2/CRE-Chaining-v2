@@ -31,7 +31,7 @@ Contains individual chaining functions (only condiering given orientation)
 Detailed info in the file header
 
 
-## Full-Genome BLAST-Search (/Full-Genome)
+## Full-Genome BLAST-Search (/BLAST_chain_search)
 
 Finds areas with high local chaining scores between a sequence and a set of ACRs
 
@@ -85,7 +85,7 @@ MOTIF
 
 If using a separate set of ACRs, try to replicate this file
 
-### Step 4 (Optional): Weighted scoring (/Full-Genome/Weighted_Scoring)
+### Step 4 (Optional): Weighted scoring (/BLAST_chain_search/Weighted_Scoring)
 
 This is heavily recommended
 
@@ -143,7 +143,7 @@ Follow Full-Genome BLAST search steps 1-4. No need to run ```get_motif_sequence.
 
 Outputs a file with chain scores (global or local, potentially weighted) for each ACR with each other
 
-#### ```v3_chaining.py```
+#### ```../anchor_chain_driver.py```
 
 Parallelized chaining. Use custom score if you ran Step 4 in Full-Genome BLAST
 
@@ -184,4 +184,72 @@ Converts each cluster to sets of genes
 
 Create graphs comparing random expression correlation to the created gene sets
 
-#### ``evaluate_expression.ipynb```
+#### ```evaluate_expression.ipynb```
+
+## ACRs vs Random Regions (/ACR_rand_compare)
+
+Compares the chaining scores between random regions and ACRs with the scores between ACRs and ACRs.
+
+### Step 1: Create Region Sets
+
+#### ```generate_rand_sets.py```
+
+Determine which ACRs should be in the TEST group (also referred to as non-ref ACRs in the documentaion)
+and which should be in the REFERENCE group. We randomly assigned 10% of the 31k *Arabidopsis Thaliana* ACRs to
+TEST and the remaining 90% to REFERENCE.
+
+#### ```random_regions.py```
+
+The ```random_region_match_sizes``` function can be used to generate the random regions with the same
+number and lengths as TEST. We call this group TEST-RAND.
+
+### Step 2: Run FIMO (MEME Suite) on ACRs and Random Regions
+
+The easiest way to do this is to create a fasta file with all of the ACRs + random regions and then
+run a command similar to the one below:
+
+```nohup fimo --oc fimo_out_ArabidopsisDAPv1  /home/jm/meme/motif_databases/ARABD/ArabidopsisDAPv1.meme /home/mwarr/Data/acr_and_rand.fa &```
+
+### Step 3: Pairwise Chain ACRs and Random Regions
+
+#### ```anchor_chain_driver```
+
+Set ```motif_mode``` to 'only_acr', choose the desired chain mode, and provide the folder containing all the
+FIMO folders to ```MOTIFS```. 
+
+### Step 4 (Optional): Find Alignment Scores
+
+#### ```get_alignment_scores.py```
+
+Use ```split_fasta``` to split up the fasta files containing TEST and TEST-RAND. The number of files
+depends on the speed you need and the number of cores you have available (I split each into 50).
+Then, run ```gen_align_scores.sh``` to launch the program for each file. Once the alignment is finished, concatenate all the files into one file:
+
+```for file in align_temp; do cat $file >> align_scores.tsv; done;```
+
+### Step 5: Generate Desired Frequency Files
+Depending on what you would like to analyze, you may run any of the following:
+
+#### ```frequencies.py```
+
+This file contains the following driver functions:
+```driver_all_summary```: Outputs score frequencies and histograms
+```driver_filter_summary```: Outputs score frequencies of regions within specific size intervals
+```driver_top```: Outputs frequency files for top 5 score ranks
+```driver_top_normal```: Outputs frequency files for top 5 score ranks; normalizes scores.
+
+#### ```freq_with_align.py```
+
+```exclude_high_align_driver``` outputs frequency files for chaining scores, excluding pairs with high alignment.
+
+#### ```chain_features.py```
+
+```driver_frequencies_all``` Outputs frequency files for the number of top scores, the number of anchors, the reference sequence length, and a combined score.
+
+### Step 6: Graph and Analyze
+
+### ```box_whisker.py```
+This is the recommended analysis method. Has functions to create various box and whisker plots, depending on what your frequency data is.
+
+### ```bar_graph.py```
+Various functions for creating bar graphs of averages across various statistics. Not as informative.

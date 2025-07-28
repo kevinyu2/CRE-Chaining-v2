@@ -24,7 +24,7 @@ to output the anchors for each pair of ACRs across all genomes
 ##########################################################
 # Settings
 
-# Set to 'full' or 'only_acr', if the acr motifs were found from the full fimo, set to full
+# Set to 'full' or 'only_acr'; if the acr motifs were found from the full fimo, set to full
 motif_mode = 'full'
 
 # 'local' or 'global'
