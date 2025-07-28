@@ -222,8 +222,8 @@ FIMO folders to ```MOTIFS```.
 #### ```get_alignment_scores.py```
 
 Use ```split_fasta``` to split up the fasta files containing TEST and TEST-RAND. The number of files
-depends on the speed you need and the number of cores you have available (I split each into 50).
-Then, run ```gen_align_scores.sh``` to launch the program for each file. Once the alignment is finished, concatenate all the files into one file:
+depends on the speed you need and the number of cores you have available (we split each into 50).
+Then, run ```gen_align_scores.sh``` to launch the program for each file. Once the alignment is finished, concatenate all the files into one file with this command:
 
 ```for file in align_temp; do cat $file >> align_scores.tsv; done;```
 
@@ -233,10 +233,10 @@ Depending on what you would like to analyze, you may run any of the following:
 #### ```frequencies.py```
 
 This file contains the following driver functions:
-```driver_all_summary```: Outputs score frequencies and histograms
-```driver_filter_summary```: Outputs score frequencies of regions within specific size intervals
-```driver_top```: Outputs frequency files for top 5 score ranks
-```driver_top_normal```: Outputs frequency files for top 5 score ranks; normalizes scores.
+- ```driver_all_summary```: Outputs score frequencies and histograms
+- ```driver_filter_summary```: Outputs score frequencies of regions within specific size intervals
+- ```driver_top```: Outputs frequency files for top 5 score ranks
+- ```driver_top_normal```: Outputs frequency files for top 5 score ranks; normalizes scores.
 
 #### ```freq_with_align.py```
 
@@ -248,8 +248,8 @@ This file contains the following driver functions:
 
 ### Step 6: Graph and Analyze
 
-### ```box_whisker.py```
+#### ```box_whisker.py```
 This is the recommended analysis method. Has functions to create various box and whisker plots, depending on what your frequency data is.
 
-### ```bar_graph.py```
+#### ```bar_graph.py```
 Various functions for creating bar graphs of averages across various statistics. Not as informative.
