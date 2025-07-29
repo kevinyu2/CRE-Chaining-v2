@@ -195,7 +195,7 @@ Compares the chaining scores between random regions and ACRs with the scores bet
 #### ```generate_rand_sets.py```
 
 Determine which ACRs should be in the TEST group (also referred to as non-ref ACRs in the documentaion)
-and which should be in the REFERENCE group. We randomly assigned 10% of the 31k *Arabidopsis Thaliana* ACRs to
+and which should be in the REFERENCE group. We randomly assigned 10% of the 31k *Arabidopsis thaliana* ACRs to
 TEST and the remaining 90% to REFERENCE.
 
 #### ```random_regions.py```
