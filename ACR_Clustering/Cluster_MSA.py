@@ -12,10 +12,10 @@ from collections import Counter
 ########################################################################
 # Settings
 
-OUTPUT_FILE = '/home/mwarr/Data/Clustering/acr_consensus_DAPv1_clustered_local.txt'
+OUTPUT_FILE = '/home/mwarr/Data/Clustering/acr_consensus_DAPv1_clustered_seta_local.txt'
 
 # Result from clustering
-CLUSTER_FILE = '/home/mwarr/Data/Clustering/hierarchical_DAPv1_clustered_local.txt'
+CLUSTER_FILE = '/home/mwarr/Data/Clustering/hierarchical_DAPv1_clustered_seta_local.txt'
 
 # List of ACRs
 ACR_SEQUENCE_FILE = '/home/projects/msu_nsf_pangenomics/pgrp/dACRxgenomes/one_genome/post_fimo/pairwise_inputs/acr_DAPv1_clustered.txt'
@@ -225,7 +225,7 @@ with open(CLUSTER_FILE, 'r') as f:
             new_seq = extract_consensus(central_star_msa(representative_seq, cluster_seq))
 
             if len(new_seq) >= MIN_CRE_LEN :
-                out.write(cluter_name)
+                out.write(f"ACR: cluster_{cluter_name}")
                 out.write('\n')
 
                 for cre in new_seq :
