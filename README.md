@@ -30,6 +30,15 @@ Contains individual chaining functions (only condiering given orientation)
 
 Detailed info in the file header
 
+### ```anchor_chain_driver.py```
+
+Does pairwise chaining for a set of ACRs. Can be given direct fimo results (use the parent directory to all the fimo_out folders) by setting motif_mode to ```only_acr```. If using a list of motifs in the format ```ACR1[\n]MOTIF1[\n]MOTIF2[\n]...ACR2...```, set motif_mode to ```full```.
+
+This can do global or local chaining, with weighted scores. ```SCORE_CENTER``` nudges all weighted scores to average at it. It is useful for local chaining because the gap and mismatch scores are typically fixed, so this allows different types of scoring systems to all average at the same match score.
+
+### ```chain_two_sets.py```
+
+Same as ```anchor_chain_driver```, but does chaining between two sets of ACRs. Faster if that is what is desired. The output always lists the ```ACR_MOTIF_SET_A``` acrs first.
 
 ## Full-Genome BLAST-Search (/BLAST_chain_search)
 
